@@ -1,0 +1,21 @@
+{
+  "name": "textcam",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "webpack --optimize-minimize",
+    "start": "webpack-dev-server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch"
+  },
+  "devDependencies": {
+    "webpack": "beta",
+    "webpack-dev-server": "latest",
+    "style-loader": "latest",
+    "url-loader": "latest",
+    "css-loader": "latest"
+  },
+  "dependencies": {
+    "font-awesome": "latest"
+  }
+}

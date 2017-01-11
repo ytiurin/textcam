@@ -1,0 +1,124 @@
+<!DOCTYPE html><html><head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+</head><body>
+
+  <div id="start-screen" class="screen">
+    <div id="start-center">
+      <div id="intro-text">
+        This app will recognize text from the given image.<br/><br/>
+        <b>Choose the image source:</b>
+      </div>
+      <a id="capture-photo" class="big-button" href="#"><i class="fa fa-camera fa-4x"></i> Capture photo</a>
+      <a id="capture-photo" class="big-button" href="#"><i class="fa fa-upload fa-4x" aria-hidden="true"></i> Upload image</a>
+    </div>
+  </div>
+
+  <div id="capture-screen" class="screen">
+    <canvas id="canvas"></canvas>
+    <a id="close-capture-button" href="#"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>
+    <a id="lang-button" href="#"><span id="selected-lang">English</span> <i class="fa fa-caret-down"></i></a>
+    <a id="capture-button" href="#"><i class="fa fa-camera fa-2x"></i></a>
+  </div>
+
+  <div id="lang-screen" class="screen">
+    <a id="close-lang-button" href="#"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>
+    <div id="lang-list">
+<a class="lang-val" href="#" data-val='eng'     > English       </a>
+<div class="hr"></div>
+<a class="lang-val" href="#" data-val='afr'     > Afrikaans             </a>
+<a class="lang-val" href="#" data-val='ara'     > Arabic                </a>
+<a class="lang-val" href="#" data-val='aze'     > Azerbaijani           </a>
+<a class="lang-val" href="#" data-val='bel'     > Belarusian            </a>
+<a class="lang-val" href="#" data-val='ben'     > Bengali               </a>
+<a class="lang-val" href="#" data-val='bul'     > Bulgarian             </a>
+<a class="lang-val" href="#" data-val='cat'     > Catalan               </a>
+<a class="lang-val" href="#" data-val='ces'     > Czech                 </a>
+<a class="lang-val" href="#" data-val='chi_sim' > Chinese               </a>
+<a class="lang-val" href="#" data-val='chi_tra' > Traditional Chinese   </a>
+<a class="lang-val" href="#" data-val='chr'     > Cherokee              </a>
+<a class="lang-val" href="#" data-val='dan'     > Danish                </a>
+<a class="lang-val" href="#" data-val='deu'     > German                </a>
+<a class="lang-val" href="#" data-val='ell'     > Greek                 </a>
+<a class="lang-val" href="#" data-val='enm'     > English (Old)         </a>
+<a class="lang-val" href="#" data-val='meme'    > Internet Meme         </a>
+<a class="lang-val" href="#" data-val='epo'     > Esperanto             </a>
+<a class="lang-val" href="#" data-val='epo_alt' > Esperanto alternative </a>
+<a class="lang-val" href="#" data-val='equ'     > Math                  </a>
+<a class="lang-val" href="#" data-val='est'     > Estonian              </a>
+<a class="lang-val" href="#" data-val='eus'     > Basque                </a>
+<a class="lang-val" href="#" data-val='fin'     > Finnish               </a>
+<a class="lang-val" href="#" data-val='fra'     > French                </a>
+<a class="lang-val" href="#" data-val='frk'     > Frankish              </a>
+<a class="lang-val" href="#" data-val='frm'     > French (Old)          </a>
+<a class="lang-val" href="#" data-val='glg'     > Galician              </a>
+<a class="lang-val" href="#" data-val='grc'     > Ancient Greek         </a>
+<a class="lang-val" href="#" data-val='heb'     > Hebrew                </a>
+<a class="lang-val" href="#" data-val='hin'     > Hindi                 </a>
+<a class="lang-val" href="#" data-val='hrv'     > Croatian              </a>
+<a class="lang-val" href="#" data-val='hun'     > Hungarian             </a>
+<a class="lang-val" href="#" data-val='ind'     > Indonesian            </a>
+<a class="lang-val" href="#" data-val='isl'     > Icelandic             </a>
+<a class="lang-val" href="#" data-val='ita'     > Italian               </a>
+<a class="lang-val" href="#" data-val='ita_old' > Italian (Old)         </a>
+<a class="lang-val" href="#" data-val='jpn'     > Japanese              </a>
+<a class="lang-val" href="#" data-val='kan'     > Kannada               </a>
+<a class="lang-val" href="#" data-val='kor'     > Korean                </a>
+<a class="lang-val" href="#" data-val='lav'     > Latvian               </a>
+<a class="lang-val" href="#" data-val='lit'     > Lithuanian            </a>
+<a class="lang-val" href="#" data-val='mal'     > Malayalam             </a>
+<a class="lang-val" href="#" data-val='mkd'     > Macedonian            </a>
+<a class="lang-val" href="#" data-val='mlt'     > Maltese               </a>
+<a class="lang-val" href="#" data-val='msa'     > Malay                 </a>
+<a class="lang-val" href="#" data-val='nld'     > Dutch                 </a>
+<a class="lang-val" href="#" data-val='nor'     > Norwegian             </a>
+<a class="lang-val" href="#" data-val='pol'     > Polish                </a>
+<a class="lang-val" href="#" data-val='por'     > Portuguese            </a>
+<a class="lang-val" href="#" data-val='ron'     > Romanian              </a>
+<a class="lang-val" href="#" data-val='rus'     > Russian               </a>
+<a class="lang-val" href="#" data-val='slk'     > Slovakian             </a>
+<a class="lang-val" href="#" data-val='slv'     > Slovenian             </a>
+<a class="lang-val" href="#" data-val='spa'     > Spanish               </a>
+<a class="lang-val" href="#" data-val='spa_old' > Old Spanish           </a>
+<a class="lang-val" href="#" data-val='sqi'     > Albanian              </a>
+<a class="lang-val" href="#" data-val='srp'     > Serbian (Latin)       </a>
+<a class="lang-val" href="#" data-val='swa'     > Swahili               </a>
+<a class="lang-val" href="#" data-val='swe'     > Swedish               </a>
+<a class="lang-val" href="#" data-val='tam'     > Tamil                 </a>
+<a class="lang-val" href="#" data-val='tel'     > Telugu                </a>
+<a class="lang-val" href="#" data-val='tgl'     > Tagalog               </a>
+<a class="lang-val" href="#" data-val='tha'     > Thai                  </a>
+<a class="lang-val" href="#" data-val='tur'     > Turkish               </a>
+<a class="lang-val" href="#" data-val='ukr'     > Ukrainian             </a>
+<a class="lang-val" href="#" data-val='vie'     > Vietnamese            </a>
+    </div>
+  </div>
+
+  <div id="progress-screen" class="screen">
+    <div id="progress-dialog">
+      <div id="progress-message">Recognizing text</div>
+      <progress id="progress"></progress>
+      <div style="text-align:right;"><a href="#">Cancel</a></div>
+    </div>
+  </div>
+
+  <div id="textarea-screen" class="screen">
+    <div id="textarea-float">
+      <textarea id="textarea">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
+    </div>
+    <div id="textarea-bottom">
+      <a id="download-txt" class="button4" href="#"><i class="fa fa-download fa-2x fa-lg" aria-hidden="true"></i> TXT</a>
+      <a id="download-doc" class="button4" href="#"><i class="fa fa-download fa-2x fa-lg" aria-hidden="true"></i> DOC</a>
+    </div>
+    <a id="close-textarea-button" href="#"><i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i></a>
+  </div>
+
+  <video id="video" width="0" height="0" autoplay></video>
+  <canvas id="recognize-canvas"></canvas>
+
+  <script src="/assets/bundle.js"></script>
+
+</body></html>
