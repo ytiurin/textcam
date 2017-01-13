@@ -1,6 +1,6 @@
 // Chrome's currently missing some useful cache methods,
 // this polyfill adds them.
-importScripts('./serviceworker-cache-polyfill.js');
+importScripts('./src/serviceworker-cache-polyfill.js');
 
 // Here comes the install event!
 // This only happens once, when the browser sees this
@@ -24,8 +24,8 @@ self.addEventListener('install', function(event) {
       return cache.addAll([
         './',
         './manifest.json',
-        './assets/bundle.js',
-        './worker.js'
+        './assets/app.js',
+        './src/worker.js'
       ]);
     })
   );

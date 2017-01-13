@@ -240,7 +240,7 @@ if (process.env.NODE_ENV === "development") {
     defaultOptions.workerPath = location.protocol + '//' + location.host + '/dist/worker.dev.js?nocache=' + Math.random().toString(36).slice(3);
 } else {
     var version = require('../../package.json').version;
-    defaultOptions.workerPath = location.protocol + '//' + location.host + '/worker.js';
+    defaultOptions.workerPath = location.protocol + '//' + location.host + '/src/worker.js';
 }
 
 exports.defaultOptions = defaultOptions;
