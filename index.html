@@ -1,0 +1,156 @@
+<!DOCTYPE html><html><head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>TextCam</title>
+
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#CCCCCC">
+
+  <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="TETRIS">
+  <link rel="apple-touch-icon" href="https://github.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57" href="https://github.com/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="https://github.com/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="https://github.com/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://github.com/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="https://github.com/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="https://github.com/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="https://github.com/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="https://github.com/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.com/apple-touch-icon-180x180.png">
+
+  <link rel="mask-icon" href="https://assets-cdn.github.com/pinned-octocat.svg" color="#F1F1F1">
+  <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+
+</head><body>
+  <div id="root">
+    <div id="start-screen" class="screen">
+      <div id="start-center">
+        <a class="lang-button" href="#lang-screen"><span><span class="selected-lang">English</span> <i class="fa fa-caret-down"></i></a>
+        <div id="intro-text">
+          This app will recognize text from the given image.<br/><br/>
+          <b>Choose the image source:</b>
+        </div>
+        <a id="capture-photo" class="big-button" href="#capture-screen"><i class="fa fa-camera fa-4x"></i> Capture photo</a>
+        <a id="upload-file-button" class="big-button" href="#"><i class="fa fa-upload fa-4x" aria-hidden="true"></i> Upload image</a>
+      </div>
+    </div>
+
+    <div id="capture-screen" class="screen">
+      <canvas id="canvas"></canvas>
+      <a id="close-capture-button" href="#start-screen"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>
+      <a class="lang-button" href="#lang-screen"><span><span class="selected-lang">English</span> <i class="fa fa-caret-down"></i></a>
+      <a id="capture-button" href="#progress-screen"><i class="fa fa-camera fa-2x"></i></span></a>
+    </div>
+
+    <div id="lang-screen" class="screen">
+      <a id="close-lang-button" href="#capture-screen"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>
+      <div id="lang-list">
+        <a class="lang-val" href="#capture-screen" data-val='eng'     > English       </a>
+        <div class="hr"></div>
+        <a class="lang-val" href="#capture-screen" data-val='afr'     > Afrikaans             </a>
+        <a class="lang-val" href="#capture-screen" data-val='ara'     > Arabic                </a>
+        <a class="lang-val" href="#capture-screen" data-val='aze'     > Azerbaijani           </a>
+        <a class="lang-val" href="#capture-screen" data-val='bel'     > Belarusian            </a>
+        <a class="lang-val" href="#capture-screen" data-val='ben'     > Bengali               </a>
+        <a class="lang-val" href="#capture-screen" data-val='bul'     > Bulgarian             </a>
+        <a class="lang-val" href="#capture-screen" data-val='cat'     > Catalan               </a>
+        <a class="lang-val" href="#capture-screen" data-val='ces'     > Czech                 </a>
+        <a class="lang-val" href="#capture-screen" data-val='chi_sim' > Chinese               </a>
+        <a class="lang-val" href="#capture-screen" data-val='chi_tra' > Traditional Chinese   </a>
+        <a class="lang-val" href="#capture-screen" data-val='chr'     > Cherokee              </a>
+        <a class="lang-val" href="#capture-screen" data-val='dan'     > Danish                </a>
+        <a class="lang-val" href="#capture-screen" data-val='deu'     > German                </a>
+        <a class="lang-val" href="#capture-screen" data-val='ell'     > Greek                 </a>
+        <a class="lang-val" href="#capture-screen" data-val='enm'     > English (Old)         </a>
+        <a class="lang-val" href="#capture-screen" data-val='meme'    > Internet Meme         </a>
+        <a class="lang-val" href="#capture-screen" data-val='epo'     > Esperanto             </a>
+        <a class="lang-val" href="#capture-screen" data-val='epo_alt' > Esperanto alternative </a>
+        <a class="lang-val" href="#capture-screen" data-val='equ'     > Math                  </a>
+        <a class="lang-val" href="#capture-screen" data-val='est'     > Estonian              </a>
+        <a class="lang-val" href="#capture-screen" data-val='eus'     > Basque                </a>
+        <a class="lang-val" href="#capture-screen" data-val='fin'     > Finnish               </a>
+        <a class="lang-val" href="#capture-screen" data-val='fra'     > French                </a>
+        <a class="lang-val" href="#capture-screen" data-val='frk'     > Frankish              </a>
+        <a class="lang-val" href="#capture-screen" data-val='frm'     > French (Old)          </a>
+        <a class="lang-val" href="#capture-screen" data-val='glg'     > Galician              </a>
+        <a class="lang-val" href="#capture-screen" data-val='grc'     > Ancient Greek         </a>
+        <a class="lang-val" href="#capture-screen" data-val='heb'     > Hebrew                </a>
+        <a class="lang-val" href="#capture-screen" data-val='hin'     > Hindi                 </a>
+        <a class="lang-val" href="#capture-screen" data-val='hrv'     > Croatian              </a>
+        <a class="lang-val" href="#capture-screen" data-val='hun'     > Hungarian             </a>
+        <a class="lang-val" href="#capture-screen" data-val='ind'     > Indonesian            </a>
+        <a class="lang-val" href="#capture-screen" data-val='isl'     > Icelandic             </a>
+        <a class="lang-val" href="#capture-screen" data-val='ita'     > Italian               </a>
+        <a class="lang-val" href="#capture-screen" data-val='ita_old' > Italian (Old)         </a>
+        <a class="lang-val" href="#capture-screen" data-val='jpn'     > Japanese              </a>
+        <a class="lang-val" href="#capture-screen" data-val='kan'     > Kannada               </a>
+        <a class="lang-val" href="#capture-screen" data-val='kor'     > Korean                </a>
+        <a class="lang-val" href="#capture-screen" data-val='lav'     > Latvian               </a>
+        <a class="lang-val" href="#capture-screen" data-val='lit'     > Lithuanian            </a>
+        <a class="lang-val" href="#capture-screen" data-val='mal'     > Malayalam             </a>
+        <a class="lang-val" href="#capture-screen" data-val='mkd'     > Macedonian            </a>
+        <a class="lang-val" href="#capture-screen" data-val='mlt'     > Maltese               </a>
+        <a class="lang-val" href="#capture-screen" data-val='msa'     > Malay                 </a>
+        <a class="lang-val" href="#capture-screen" data-val='nld'     > Dutch                 </a>
+        <a class="lang-val" href="#capture-screen" data-val='nor'     > Norwegian             </a>
+        <a class="lang-val" href="#capture-screen" data-val='pol'     > Polish                </a>
+        <a class="lang-val" href="#capture-screen" data-val='por'     > Portuguese            </a>
+        <a class="lang-val" href="#capture-screen" data-val='ron'     > Romanian              </a>
+        <a class="lang-val" href="#capture-screen" data-val='rus'     > Russian               </a>
+        <a class="lang-val" href="#capture-screen" data-val='slk'     > Slovakian             </a>
+        <a class="lang-val" href="#capture-screen" data-val='slv'     > Slovenian             </a>
+        <a class="lang-val" href="#capture-screen" data-val='spa'     > Spanish               </a>
+        <a class="lang-val" href="#capture-screen" data-val='spa_old' > Old Spanish           </a>
+        <a class="lang-val" href="#capture-screen" data-val='sqi'     > Albanian              </a>
+        <a class="lang-val" href="#capture-screen" data-val='srp'     > Serbian (Latin)       </a>
+        <a class="lang-val" href="#capture-screen" data-val='swa'     > Swahili               </a>
+        <a class="lang-val" href="#capture-screen" data-val='swe'     > Swedish               </a>
+        <a class="lang-val" href="#capture-screen" data-val='tam'     > Tamil                 </a>
+        <a class="lang-val" href="#capture-screen" data-val='tel'     > Telugu                </a>
+        <a class="lang-val" href="#capture-screen" data-val='tgl'     > Tagalog               </a>
+        <a class="lang-val" href="#capture-screen" data-val='tha'     > Thai                  </a>
+        <a class="lang-val" href="#capture-screen" data-val='tur'     > Turkish               </a>
+        <a class="lang-val" href="#capture-screen" data-val='ukr'     > Ukrainian             </a>
+        <a class="lang-val" href="#capture-screen" data-val='vie'     > Vietnamese            </a>
+      </div>
+    </div>
+
+    <div id="progress-screen" class="screen">
+      <div id="progress-dialog">
+        <div id="progress-message">Initializing</div>
+        <progress id="progress" max="100"></progress>
+        <div style="text-align:right;"><a id="cancel-recognize-button" href="#capture-screen">Cancel</a></div>
+      </div>
+    </div>
+
+    <div id="textarea-screen" class="screen">
+      <div id="textarea-float">
+        <textarea id="textarea">
+          <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. -->
+        </textarea>
+      </div>
+      <div id="textarea-bottom">
+        <a id="download-txt" class="button4" href="#"><i class="fa fa-download fa-2x fa-lg" aria-hidden="true"></i> TXT</a>
+        <a id="download-doc" class="button4" href="#"><i class="fa fa-download fa-2x fa-lg" aria-hidden="true"></i> DOC</a>
+      </div>
+      <a id="close-textarea-button" href="#start-screen"><i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i></a>
+    </div>
+
+    <video id="video" width="0" height="0" autoplay></video>
+    <canvas id="recognize-canvas" style="position:absolute;top:-9999px;"></canvas>
+    <input type="file" id="upload-file" style="position:absolute;top:-9999px;" >
+
+    <script src="/assets/app.js"></script>
+
+    <script>
+      // Let's register our serviceworker
+      navigator.serviceWorker.register('./proxy/sw.js', {
+        // The scope cannot be parent to the script url
+        scope: './'
+      });
+    </script>
+
+  </div>
+</body></html>

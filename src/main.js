@@ -8,12 +8,7 @@ import "style-loader!./stylesheet.css"
 
 function byId( id )
 {
-  return document.getElementById( id );
-}
-
-function byClass( cl )
-{
-  return document.getElementsByClassName( cl )[0];
+  return document.getElementById( id )
 }
 
 function toArray( obj )
@@ -21,7 +16,25 @@ function toArray( obj )
   return Array.prototype.slice.call( obj )
 }
 
-var viewportRect = byClass("screen").getBoundingClientRect()
+function byClass( cl )
+{
+  return toArray( document.getElementsByClassName( cl ))
+}
+
+function showScreen( id )
+{
+  byClass( "screen" ).map( function( el ) {
+    el.classList.add( "hide" )
+  })
+
+  id = id.map ? id : [ id ]
+
+  id.map( function( id ) {
+    byId( id ).classList.remove( "hide" )
+  })
+}
+
+var viewportRect = byClass("screen")[0].getBoundingClientRect()
 var screenWidth = viewportRect.width
 var screenHeight = viewportRect.height
 var userMediaStream
@@ -32,22 +45,26 @@ var context = canvas.getContext('2d');
 
 var recognizedText = ""
 var lang = "eng"
+var tessPromise
+var prevScreenId
 
 function recognizeFile(file)
 {
-  Tesseract.recognize( file, lang )
+  tessPromise = Tesseract.recognize( file, lang )
   .progress(function(packet){
-    console.info(packet)
-
+    // console.info(packet)
     byId( "progress-message" ).innerHTML = packet.status.charAt(0).toUpperCase() + packet.status.substr( 1 )
     byId( "progress" ).value = packet.progress * 100 << 0
   })
   .then(function(data){
-    console.log(data)
-
+    // console.log(data)
     recognizedText = data.text
 
     byId( "textarea" ).innerHTML = data.text
+    showScreen( "textarea-screen" )
+  })
+  .catch( function (e) {
+    console.log(e)
   })
 }
 
@@ -98,10 +115,17 @@ function capturePhoto()
   binarize( context, videoWidth, videoHeight )
   recognizeFile(context.getImageData(0, 0, screenWidth, screenHeight))
   stopProjectVideo()
+
+  showScreen([ "capture-screen", "progress-screen" ])
 }
 
 function enableCameraCapture()
 {
+  tessPromise && tessPromise._instance.terminate()
+
+  prevScreenId = "capture-screen"
+  showScreen( "capture-screen" )
+
   navigator.mediaDevices.getUserMedia(
     { video: { width: screenWidth, height: screenHeight },
       facingMode: { exact: "environment" },
@@ -121,20 +145,55 @@ function enableCameraCapture()
   })
   .catch( function( err ) {
     //~_~
+    console.log("WOOPSI",err)
   })
 
   byId( "capture-photo" ).removeEventListener( "click", enableCameraCapture )
 }
 
-byId( "capture-photo" ).addEventListener( "click", enableCameraCapture )
+function start()
+{
+  prevScreenId = "start-screen"
+  showScreen( "start-screen" )
+}
 
+
+byId( "upload-file-button" ).addEventListener( "click", function() {
+  byId( "upload-file" ).click()
+})
+byId( "upload-file" ).addEventListener( "change", function() {
+  if ( !this.files[0] )
+    return
+  recognizeFile(window.lastFile=this.files[0])
+  showScreen([ "start-screen", "progress-screen" ])
+})
+
+byId( "capture-photo" ).addEventListener( "click", enableCameraCapture )
+byClass( "lang-button" ).map( function( el ) {
+  el.addEventListener( "click", function() {
+    showScreen( "lang-screen" )
+  })
+})
+byId( "close-lang-button" ).addEventListener( "click", function() {
+  showScreen( prevScreenId )
+})
+byId( "cancel-recognize-button" ).addEventListener( "click", function() {
+  showScreen( "start-screen" )
+  if ( prevScreenId === "capture-screen" )
+    enableCameraCapture()
+})
 byId( "close-capture-button" ).addEventListener( "click", stopProjectVideo )
+byId( "close-capture-button" ).addEventListener( "click", start )
+byId( "close-textarea-button" ).addEventListener( "click", start )
 
 // SELECT LANG
-toArray( document.getElementsByClassName( "lang-val" )).map( function( el ) {
-  el.addEventListener( "click", function() {
+byClass( "lang-val" ).map( function( el ) {
+  el.addEventListener( "click", function( e ) {
     lang = this.dataset.val
-    byId("selected-lang").innerHTML = this.innerHTML
+    byClass("selected-lang").map( function( el ) {
+      el.innerHTML = e.target.innerHTML
+    })
+    showScreen( prevScreenId )
   })
 })
 
@@ -154,7 +213,17 @@ downloadFile( recognizedText, "text/plain", "txt" )
 })
 
 document.getElementById("download-doc").addEventListener( "click", function() {
-downloadFile( `<html><head><xml><word:WordDocument><word:View>Print</word:View><word:Zoom>90</word:Zoom><word:DoNotOptimizeForBrowser/></word:WordDocument></xml></head><body>${recognizedText.replace(/\n/g,"<br>")}</body></html>`, "text/html", "doc" )
+downloadFile( "<html><head><xml><word:WordDocument><word:View>Print</word:View><word:Zoom>90</word:Zoom><word:DoNotOptimizeForBrowser/></word:WordDocument></xml></head><body>" + recognizedText.replace(/\n/g,"<br>") + "</body></html>", "text/html", "doc" )
 })
 
-// recognizeFile('cosmic.png')
+window.addEventListener("resize", function() {
+  viewportRect = byClass("screen")[0].getBoundingClientRect()
+  screenWidth = viewportRect.width
+  screenHeight = viewportRect.height
+  screenRatio = screenWidth / screenHeight
+
+  canvas.width = screenWidth
+  canvas.height = screenHeight
+})
+
+start()

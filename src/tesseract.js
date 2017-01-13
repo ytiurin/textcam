@@ -240,14 +240,14 @@ if (process.env.NODE_ENV === "development") {
     defaultOptions.workerPath = location.protocol + '//' + location.host + '/dist/worker.dev.js?nocache=' + Math.random().toString(36).slice(3);
 } else {
     var version = require('../../package.json').version;
-    defaultOptions.workerPath = 'https://cdn.rawgit.com/naptha/tesseract.js/' + version + '/dist/worker.js';
+    defaultOptions.workerPath = location.protocol + '//' + location.host + '/worker.js';
 }
 
 exports.defaultOptions = defaultOptions;
 
 exports.spawnWorker = function spawnWorker(instance, workerOptions) {
     if (window.Blob && window.URL) {
-        var blob = new Blob(['importScripts("' + workerOptions.workerPath + '");']);
+        var blob = new Blob(['try{importScripts("' + workerOptions.workerPath + '");}catch(e){console.log(e)}']);
         var worker = new Worker(window.URL.createObjectURL(blob));
     } else {
         var worker = new Worker(workerOptions.workerPath);
@@ -340,7 +340,7 @@ function loadImage(image, cb) {
 // to be sent from a webworker to the main app
 // or through Node's IPC), but we want
 // a (circular) DOM-like interface for walking
-// through the data. 
+// through the data.
 
 module.exports = function circularize(page) {
     page.paragraphs = [];
@@ -571,6 +571,8 @@ var TesseractWorker = function () {
 		value: function terminate() {
 			if (this.worker) adapter.terminateWorker(this);
 			this.worker = null;
+			this._currentJob = null;
+			this._queue = [];
 		}
 	}, {
 		key: '_delay',

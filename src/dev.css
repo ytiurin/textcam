@@ -1,0 +1,12 @@
+#root {
+  overflow: auto;
+}
+.screen {
+  float: left;
+  margin: 20px;
+  box-shadow: 0 25px 60px rgba(0,0,0,.3), 0 15px 40px rgba(0,0,0,.3), 0 5px 20px rgba(0,0,0,.3);
+  height: 568px !important;
+  position:relative !important;
+  width: 320px !important;
+  top: 0 !important;
+}

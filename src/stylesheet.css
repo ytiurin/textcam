@@ -1,7 +1,11 @@
+/*@import "dev.css";*/
+
 body {
-  font-size: 14px;
   color: rgba(0,0,0,.3);
+  font-size: 14px;
   line-height: 1.3;
+  margin: 0;
+  font-family: sans-serif;
 }
 a {
   color: rgba(0,0,0,.85);
@@ -17,13 +21,20 @@ b {
   margin:3px 0;
   height:1px;
 }
+#root {
+  position: fixed;
+  width: 100%;
+  height:100%;
+  /*overflow: auto;*/
+}
 .screen {
-  float: left;
-  margin: 20px;
-  box-shadow: 0 25px 60px rgba(0,0,0,.3), 0 15px 40px rgba(0,0,0,.3), 0 5px 20px rgba(0,0,0,.3);
-  height: 568px;
-  position:relative;
-  width: 320px;
+  height: 100%;
+  position: absolute;
+  top:0;
+  width: 100%;
+}
+.hide {
+  top:-9999px;
 }
 /* START SCREEN */
 #start-screen {
@@ -38,6 +49,11 @@ b {
 #intro-text {
   margin: 0 auto;
   width: 200px;
+}
+@media( max-width: 440px ) {
+  #start-center .lang-button {
+    position: relative;
+  }
 }
 .big-button {
   background-color: white;
@@ -58,6 +74,17 @@ b {
   display: block;
   margin: 15px 0 10px;
 }
+@media( max-height: 550px ) {
+  .big-button {
+    padding: 0 5px;
+    width: 100px;
+    height: 110px;
+    white-space: normal;
+  }
+  .big-button .fa-4x {
+    font-size: 3em;
+  }
+}
 /* CAPTURE SCREEN */
 #capture-screen {
   background-color: black;
@@ -69,16 +96,20 @@ b {
   padding: 18px;
   color:#fafafa;
 }
-#lang-button {
+.lang-button {
+  display:inline-block;
   position:absolute;
-  right: 20px;
-  top: 20px;
-  color:rgba(0,0,0,.5);
-  background-color: white;
-  border-radius: 10px;
-  padding: 2px 12px 2px 15px;
+  right: 0;
+  top: 0;
+  padding: 20px;
   text-decoration: none;
   text-transform: uppercase;
+}
+.lang-button > span {
+  background-color: white;
+  border-radius: 10px;
+  color:rgba(0,0,0,.5);
+  padding: 2px 12px 2px 15px;
 }
 #capture-button {
   position:absolute;
@@ -89,6 +120,15 @@ b {
   border-radius: 35px;
   padding:20px;
   color:rgba(0,0,0,.85);
+}
+@media( min-aspect-ratio: 1/1 ) {
+  #capture-button {
+    left:auto;
+    bottom:auto;
+    top:50%;
+    right: 20px;
+    margin-top:-35px;
+  }
 }
 /* LANG SCREEN */
 #lang-screen {
@@ -120,8 +160,9 @@ b {
   color: rgba(0,0,0,.6);
 }
 #progress-dialog {
-  border-radius: 3px;
   background-color: white;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 11px 15px -7px, rgba(0, 0, 0, 0.137255) 0px 24px 38px 3px, rgba(0, 0, 0, 0.117647) 0px 9px 46px 8px;
   margin: -70px auto 0;
   padding: 24px 8px 8px;
   position:relative;
@@ -132,6 +173,10 @@ b {
 #progress {
   margin: 10px auto 24px;
   width: 162px;
+}
+#cancel-recognize-button {
+  padding: 0 8px;
+  text-transform: uppercase;
 }
 /* TEXTAREA SCREEN */
 #close-textarea-button {

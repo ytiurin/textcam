@@ -1,3 +1,4 @@
+// webpack.config.js
 var path = require("path");
 module.exports = {
   module: {
@@ -9,13 +10,13 @@ module.exports = {
                 }
       ]
   },
-  devServer: { inline: true, contentBase: "build/" },
+  devServer: { inline: true, contentBase: "./" },
   entry: {
-    app: ["./build/main.js"]
+    app: ["./src/main.js"]
   },
   output: {
-    path: path.resolve(__dirname, "build"),
+    path: path.resolve(__dirname, "assets"),
     publicPath: "/assets/",
-    filename: "bundle.js"
+    filename: "[name].js"
   }
 }
