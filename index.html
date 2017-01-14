@@ -34,6 +34,21 @@
         </div>
         <a id="capture-photo" class="big-button" href="#capture-screen"><i class="fa fa-camera fa-4x"></i> Capture photo</a>
         <a id="upload-file-button" class="big-button" href="#"><i class="fa fa-upload fa-4x" aria-hidden="true"></i> Upload image</a>
+        <div id="credits">
+          <a class="twitter-share-button"
+            href="https://twitter.com/share"
+            data-text="I liked an amazing Text Recognition Web App"
+            data-url="https://ytiurin.github.com/textcam/"
+            data-hashtags="webapp, app, github, ios, android"
+            data-related="ytiurin">
+          Tweet
+          </a>
+          &nbsp;&nbsp;
+          <!-- Place this tag where you want the button to render. -->
+          <a class="github-button" href="https://github.com/ytiurin/textcam" aria-label="Star ytiurin/textcam on GitHub">Star</a>
+<br/>
+Made with worderful <a href="https://github.com/naptha/tesseract.js" target="_blank" rel="noopener">tesseract.js</a> and <a href="https://github.com/FortAwesome/Font-Awesome" target="_blank" rel="noopener">Font Awesome</a>
+        </div>
       </div>
     </div>
 
@@ -142,13 +157,34 @@
 
     <script src="./assets/app.js"></script>
 
-    <script>
-      // Let's register our serviceworker
-      navigator.serviceWorker.register('./proxy.js', {
-        // The scope cannot be parent to the script url
-        scope: './'
-      });
-    </script>
-
   </div>
+
+  <script>
+    // Let's register our serviceworker
+    navigator.serviceWorker.register('./proxy.js', {
+      // The scope cannot be parent to the script url
+      scope: './'
+    });
+  </script>
+
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  <script>window.twttr = (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0],
+      t = window.twttr || {};
+    if (d.getElementById(id)) return t;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+
+    t._e = [];
+    t.ready = function(f) {
+      t._e.push(f);
+    };
+
+    return t;
+  }(document, "script", "twitter-wjs"));</script>
+
 </body></html>

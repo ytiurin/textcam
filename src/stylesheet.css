@@ -8,7 +8,6 @@ body {
   font-family: sans-serif;
 }
 a {
-  color: rgba(0,0,0,.85);
   text-decoration: none;
 }
 b {
@@ -74,7 +73,7 @@ b {
   display: block;
   margin: 15px 0 10px;
 }
-@media( max-height: 550px ) {
+@media (max-width: 450px ) and ( max-height: 670px ) {
   .big-button {
     padding: 0 5px;
     width: 100px;
@@ -83,6 +82,21 @@ b {
   }
   .big-button .fa-4x {
     font-size: 3em;
+  }
+}
+#credits {
+  line-height: 2;
+  margin-top:40px;
+  position: absolute;
+  bottom: 20px;
+  left:0;
+  width: 100%;
+  text-align: center;
+}
+@media( max-width: 460px ) and ( max-height: 780px ),
+( max-height: 420px ) {
+  #credits {
+    position: static;
   }
 }
 /* CAPTURE SCREEN */
@@ -182,6 +196,7 @@ b {
   display:none;
 }
 #cancel-recognize-button {
+  color:rgba(0,0,0,.6);
   padding: 0 8px;
   text-transform: uppercase;
 }
