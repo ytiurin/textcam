@@ -64,7 +64,13 @@ function recognizeFile(file)
     showScreen( "textarea-screen" )
   })
   .catch( function (e) {
-    console.log(e)
+    // console.log(e)
+    showScreen([ prevScreenId, "progress-screen" ])
+    byId( "progress-screen" ).classList.add( "error" )
+    byId( "progress-message" ).innerHTML = "Could not recognize text"
+
+    if ( e.indexOf( "NetworkError" ) > -1 )
+      byId( "progress-message" ).innerHTML = "Could not download resources"
   })
 }
 
@@ -112,11 +118,17 @@ function capturePhoto()
   var context = rcanvas.getContext('2d');
   context.drawImage(video, 0, 0, videoWidth, videoHeight);
 
-  binarize( context, videoWidth, videoHeight )
-  recognizeFile(context.getImageData(0, 0, screenWidth, screenHeight))
-  stopProjectVideo()
+  // Error occures when video is not loaded yet
+  try {
+    binarize( context, videoWidth, videoHeight )
+    recognizeFile(context.getImageData(0, 0, screenWidth, screenHeight))
+    stopProjectVideo()
 
-  showScreen([ "capture-screen", "progress-screen" ])
+    showScreen([ "capture-screen", "progress-screen" ])
+  }
+  catch ( e ) {
+    // Ignore it
+  }
 }
 
 function enableCameraCapture()
@@ -145,7 +157,11 @@ function enableCameraCapture()
   })
   .catch( function( err ) {
     //~_~
-    console.log("WOOPSI",err)
+    prevScreenId = "start-screen"
+    showScreen([ "start-screen", "progress-screen" ])
+    byId( "progress-screen" ).classList.add( "error" )
+    byId( "progress-message" ).innerHTML = "Please, turn on the camera."
+    byId( "capture-photo" ).addEventListener( "click", enableCameraCapture )
   })
 
   byId( "capture-photo" ).removeEventListener( "click", enableCameraCapture )
@@ -165,6 +181,7 @@ byId( "upload-file" ).addEventListener( "change", function() {
   if ( !this.files[0] )
     return
   recognizeFile(window.lastFile=this.files[0])
+  byId( "progress-screen" ).classList.remove( "error" )
   showScreen([ "start-screen", "progress-screen" ])
 })
 

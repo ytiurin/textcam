@@ -171,8 +171,15 @@ b {
   width:210px;
 }
 #progress {
-  margin: 10px auto 24px;
+  margin: 10px auto 0;
   width: 162px;
+}
+#progress-screen .buttons {
+  text-align:right;
+  margin-top: 24px;
+}
+.error #progress {
+  display:none;
 }
 #cancel-recognize-button {
   padding: 0 8px;
