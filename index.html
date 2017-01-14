@@ -8,6 +8,13 @@
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#CCCCCC">
 
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ytiurin">
+  <meta name="twitter:creator" content="@ytiurin">
+  <meta name="twitter:title" content="Text Recognition Web App">
+  <meta name="twitter:description" content="A browser web app that recognizes text from a camera photo.">
+  <meta name="twitter:image" content="https://cdn.rawgit.com/ytiurin/textcam/master/assets/tw-card.jpg">
+
   <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="TETRIS">
   <link rel="apple-touch-icon" href="https://github.com/apple-touch-icon.png">
   <link rel="apple-touch-icon" sizes="57x57" href="https://github.com/apple-touch-icon-57x57.png">
@@ -23,7 +30,25 @@
   <link rel="mask-icon" href="https://assets-cdn.github.com/pinned-octocat.svg" color="#F1F1F1">
   <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
 
+  <meta name="description" content="A browser web app that recognizes text from a camera photo.">
+
+  <link rel="canonical" href="https://ytiurin.github.com/textcam/" data-pjax-transient>
+
+  <style>
+    body {
+      color: rgba(0,0,0,.3);
+      font-family: sans-serif;
+      font-size: 14px;
+      line-height: 1.3;
+    }
+    #root {
+      display:none;
+    }
+  </style>
+
 </head><body>
+  <div id="loading">Loading...</div>
+
   <div id="root">
     <div id="start-screen" class="screen">
       <div id="start-center">
@@ -150,14 +175,13 @@ Made with worderful <a href="https://github.com/naptha/tesseract.js" target="_bl
       </div>
       <a id="close-textarea-button" href="#start-screen"><i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i></a>
     </div>
-
-    <video id="video" width="0" height="0" autoplay></video>
-    <canvas id="recognize-canvas" style="position:absolute;top:-9999px;"></canvas>
-    <input type="file" id="upload-file" style="position:absolute;top:-9999px;" >
-
-    <script src="./assets/app.js"></script>
-
   </div>
+
+  <video id="video" width="0" height="0" autoplay></video>
+  <canvas id="recognize-canvas" style="position:absolute;top:-9999px;"></canvas>
+  <input type="file" id="upload-file" style="position:absolute;top:-9999px;" >
+
+  <script src="./assets/app.js"></script>
 
   <script>
     // Let's register our serviceworker

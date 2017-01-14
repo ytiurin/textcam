@@ -35,6 +35,12 @@ b {
 .hide {
   top:-9999px;
 }
+#loading {
+  display:none;
+}
+#root {
+  display:block;
+}
 /* START SCREEN */
 #start-screen {
   background-color: rgba(0,0,0,.05);
