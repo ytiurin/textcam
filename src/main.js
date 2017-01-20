@@ -173,7 +173,7 @@ function start()
   showScreen( "start-screen" )
 }
 
-
+// BUTTONS CLICKS
 byId( "upload-file-button" ).addEventListener( "click", function() {
   byId( "upload-file" ).click()
 })
@@ -215,24 +215,26 @@ byClass( "lang-val" ).map( function( el ) {
 })
 
 // FILE DOWNLOAD
-function downloadFile( text, mimetype, ext )
+function downloadFile( plain, text, mimetype, ext )
 {
-var byteNumbers = new Uint8Array(text.length);
-for (var i = 0; i < text.length; i++)
-  byteNumbers[i] = text.charCodeAt(i);
-var blob = new Blob([byteNumbers], {type: mimetype });
+  var byteNumbers = new Uint8Array(text.length);
+  for (var i = 0; i < text.length; i++)
+    byteNumbers[i] = text.charCodeAt(i);
+  var blob = new Blob([byteNumbers], {type: mimetype });
+  var title = plain.substr(0,20).split(" ").slice(0,-1).join(" ")
 
-window.saveAs(blob, "yes." + ext );
+  window.saveAs(blob, title + "." + ext );
 }
 
 document.getElementById("download-txt").addEventListener( "click", function() {
-downloadFile( recognizedText, "text/plain", "txt" )
+  downloadFile( recognizedText, recognizedText, "text/plain", "txt" )
 })
 
 document.getElementById("download-doc").addEventListener( "click", function() {
-downloadFile( "<html><head><xml><word:WordDocument><word:View>Print</word:View><word:Zoom>90</word:Zoom><word:DoNotOptimizeForBrowser/></word:WordDocument></xml></head><body>" + recognizedText.replace(/\n/g,"<br>") + "</body></html>", "text/html", "doc" )
+  downloadFile( recognizedText,  "<html><head><xml><word:WordDocument><word:View>Print</word:View><word:Zoom>90</word:Zoom><word:DoNotOptimizeForBrowser/></word:WordDocument></xml></head><body>" + recognizedText.replace(/\n/g,"<br>") + "</body></html>", "text/html", "doc" )
 })
 
+// WINDOW RESIZE
 window.addEventListener("resize", function() {
   viewportRect = byClass("screen")[0].getBoundingClientRect()
   screenWidth = viewportRect.width
@@ -242,5 +244,10 @@ window.addEventListener("resize", function() {
   canvas.width = screenWidth
   canvas.height = screenHeight
 })
+
+// DETECT CAMERA FEATURE
+if ( !( navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia )) {
+  byId( "capture-photo" ).style.display = "none"
+}
 
 start()

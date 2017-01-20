@@ -28,9 +28,26 @@ b {
 }
 .screen {
   height: 100%;
+  left:0;
   position: absolute;
   top:0;
   width: 100%;
+}
+@media( min-width: 1024px ) {
+  body {
+    background-color: rgba(0,0,0,.08);
+  }
+  .screen {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.137255) 0px 2px 2px 0px, rgba(0, 0, 0, 0.117647) 0px 1px 5px 0px;
+    height: 768px;
+    width: 1024px;
+    left: 50%;
+    top: 40px;
+    margin: 0 0 0 -512px;
+  }
+  #start-screen {
+    background-color: white!important;
+  }
 }
 .hide {
   top:-9999px;
@@ -207,6 +224,9 @@ b {
   text-transform: uppercase;
 }
 /* TEXTAREA SCREEN */
+#textarea-screen {
+  background-color: white;
+}
 #close-textarea-button {
   position:absolute;
   left: 0;
