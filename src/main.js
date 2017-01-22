@@ -252,8 +252,3 @@ if ( !( navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozG
 }
 
 start()
-setTimeout(function(){
-
-  downloadFile( "lil",  "<html><head><xml><word:WordDocument><word:View>Print</word:View><word:Zoom>90</word:Zoom><word:DoNotOptimizeForBrowser/></word:WordDocument></xml></head><body>lil</body></html>", "text/html", "doc" )
-
-},7000)
