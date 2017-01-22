@@ -53,6 +53,7 @@ function recognizeFile(file)
   tessPromise = Tesseract.recognize( file, lang )
   .progress(function(packet){
     // console.info(packet)
+    byId( "progress-screen" ).classList.remove( "error" )
     byId( "progress-message" ).innerHTML = packet.status.charAt(0).toUpperCase() + packet.status.substr( 1 )
     byId( "progress" ).value = packet.progress * 100 << 0
   })
@@ -251,3 +252,8 @@ if ( !( navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozG
 }
 
 start()
+setTimeout(function(){
+
+  downloadFile( "lil",  "<html><head><xml><word:WordDocument><word:View>Print</word:View><word:Zoom>90</word:Zoom><word:DoNotOptimizeForBrowser/></word:WordDocument></xml></head><body>lil</body></html>", "text/html", "doc" )
+
+},7000)

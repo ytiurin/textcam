@@ -169,6 +169,7 @@ b {
 }
 /* LANG SCREEN */
 #lang-screen {
+  background-color: white;
   box-sizing: border-box;
   padding-top: 64px;
 }
